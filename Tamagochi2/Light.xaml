@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Tamagochi2">
+    <Style x:Key="MainFont">
+        <Setter Property="Control.FontSize" Value="12"></Setter>
+        <Setter Property="ItemsControl.FontWeight" Value="Bold"></Setter>
+        <Setter Property="ItemsControl.Foreground" Value="Violet"></Setter>
+    </Style>
+    <Style x:Key="Button">
+        <Setter Property="Control.FontSize" Value="12"></Setter>
+        <Setter Property="ItemsControl.FontWeight" Value="Bold"></Setter>
+        <Setter Property="ItemsControl.Foreground" Value="Green"></Setter>
+        <Setter Property="ItemsControl.Background" Value="FloralWhite"></Setter>
+    </Style>
+    <Style TargetType="Grid">
+        <Setter Property="Background" Value="FloralWhite"></Setter>
+    </Style>
+</ResourceDictionary>
+    
