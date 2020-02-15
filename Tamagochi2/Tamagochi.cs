@@ -13,17 +13,23 @@ namespace Tamagochi2
     {
         public int Life { get; set; }
         public int LifeAdditionStep { get; set; }
-        public string Thought { get; set; }
+        public int ThoughtID { get; set; }
         public string[] Thoughts { get; set; }
         public Tamagochi()
         {
             Life = 1000;
             LifeAdditionStep = 150;
-            Thoughts = new string[] { "Feed me! ", "Walk with me!", "I want sleep!", "I am sick...", "I want to play!", "Thanks, Vika!" };
-            Thought = GetNewThought();
+            Thoughts = new string[] { "Feed me! ", "Walk with me!", "I am sick...", "I want sleep!", "I want to play!", "Thanks, Vika!" };
+            ThoughtID = GetNewThoughtID();
         }
 
-        
+        public int GetNewThoughtID()
+        {
+            Random rnd = new Random();
+            int thoughtID = rnd.Next(0, 5);
+            return thoughtID;
+        }
+
         public Shape GetLifeBar()
         {
             Rectangle lifeBar = new Rectangle();
@@ -58,13 +64,6 @@ namespace Tamagochi2
             return thoughts;
         }
 
-        internal string GetNewThought()
-        {
-            Random rnd = new Random();
-            string thought = Thoughts[rnd.Next(0, 5)];
-            return thought;
-        }
-
         internal void LowerLife(int lowlife)
         {
             if (Life <= lowlife)
@@ -77,14 +76,14 @@ namespace Tamagochi2
 
         internal void AddLife(int addLife)
         {
-            if (Life >= 2000)
+            if (Life >= 1500)
             { }
             else
             {
                 Life += addLife;
             }
 
-            Thought = Thoughts[5];
+            ThoughtID = 5;
         }
     }
 }

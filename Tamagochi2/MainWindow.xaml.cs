@@ -21,11 +21,16 @@ namespace Tamagochi2
     public partial class MainWindow : Window
     {
         Tamagochi tamagochi;
+        private MediaPlayer player = new MediaPlayer();
+        private MediaPlayer playerMain = new MediaPlayer();
         private readonly System.Windows.Threading.DispatcherTimer timerLife = new System.Windows.Threading.DispatcherTimer();
         private readonly System.Windows.Threading.DispatcherTimer timerThoughts = new System.Windows.Threading.DispatcherTimer();
         public MainWindow()
         {
             InitializeComponent();
+            player.MediaFailed += (s, r) => MessageBox.Show("Error");
+            player.Open(new Uri(@"sound/Pikachu_start.mp3", UriKind.RelativeOrAbsolute));
+            player.Play();
         }
 
         private void btnStartGame_Click(object sender, RoutedEventArgs e)
@@ -37,6 +42,53 @@ namespace Tamagochi2
 
             DrawLifeBarDecreasing();
             DrawThoughtsChange();
+            playerMain.Open(new Uri(@"sound/main.mp3", UriKind.RelativeOrAbsolute));
+            playerMain.Play();
+            PlayPikachuThought();
+
+
+        }
+
+        private void PlayPikachuThought()
+        {
+            
+            switch (tamagochi.ThoughtID)
+            {
+                case 0: //feed
+                    {
+                        player.Open(new Uri(@"sound/Pikachu_feed.mp3", UriKind.RelativeOrAbsolute));
+                        break;
+                    }
+                case 1: //walk
+                    {
+                        player.Open(new Uri(@"sound/Pikachu_walk.mp3", UriKind.RelativeOrAbsolute));
+                        break;
+                    }
+                case 2: //cure
+                    {
+                        player.Open(new Uri(@"sound/Pikachu_sick.mp3", UriKind.RelativeOrAbsolute));
+                        break;
+                    }
+                case 3: //sleep
+                    {
+                        player.Open(new Uri(@"sound/Pikachu_sleep.mp3", UriKind.RelativeOrAbsolute));
+                        break;
+                    }
+                case 4: //play
+                    {
+                        player.Open(new Uri(@"sound/Pikachu_play.mp3", UriKind.RelativeOrAbsolute));
+                        break;
+                    }
+                case 5: //thank you
+                    {
+                        player.Open(new Uri(@"sound/Pikachu_thankyou.mp3", UriKind.RelativeOrAbsolute));
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+            player.Play();
 
 
         }
@@ -50,8 +102,9 @@ namespace Tamagochi2
 
         private void TickThought(object sender, EventArgs e)
         {
-            tamagochi.Thought = tamagochi.GetNewThought();
+            tamagochi.ThoughtID = tamagochi.GetNewThoughtID();
             DrawTamagochiThougts();
+            PlayPikachuThought();
         }
 
         private void DrawLifeBarDecreasing()
@@ -82,7 +135,7 @@ namespace Tamagochi2
             myCanvasThoughts.Children.Add(thoughts);
 
             Label lbThoughts = new Label();
-            lbThoughts.Content = tamagochi.Thought;
+            lbThoughts.Content = tamagochi.Thoughts[tamagochi.ThoughtID];
             lbThoughts.Foreground = new SolidColorBrush(Colors.Green);
             lbThoughts.FontWeight = FontWeights.Bold;
             lbThoughts.FontSize = 15;
@@ -109,49 +162,59 @@ namespace Tamagochi2
 
         private void btnFeed_Click(object sender, RoutedEventArgs e)
         {
-            if (tamagochi.Thought == tamagochi.Thoughts[0])
+            if (tamagochi.ThoughtID == 0)
             {
                 tamagochi.AddLife(tamagochi.LifeAdditionStep);
                 DrawTamagochiThougts();
                 DrawTamagochiLifeBar();
+                PlayPikachuThought();
+
             }
 
         }
         private void btnWalk_Click(object sender, RoutedEventArgs e)
         {
-            if (tamagochi.Thought == tamagochi.Thoughts[1])
+            if (tamagochi.ThoughtID == 1)
             {
                 tamagochi.AddLife(tamagochi.LifeAdditionStep);
                 DrawTamagochiThougts();
                 DrawTamagochiLifeBar();
+                PlayPikachuThought();
+
             }
         }
         private void btnCure_Click(object sender, RoutedEventArgs e)
         {
-            if (tamagochi.Thought == tamagochi.Thoughts[3])
+            if (tamagochi.ThoughtID == 2)
             {
                 tamagochi.AddLife(tamagochi.LifeAdditionStep);
                 DrawTamagochiThougts();
                 DrawTamagochiLifeBar();
+                PlayPikachuThought();
+
             }
         }
         private void btnSleep_Click(object sender, RoutedEventArgs e)
         {
-            if (tamagochi.Thought == tamagochi.Thoughts[2])
+            if (tamagochi.ThoughtID == 3)
             {
                 tamagochi.AddLife(tamagochi.LifeAdditionStep);
                 DrawTamagochiThougts();
                 DrawTamagochiLifeBar();
+                PlayPikachuThought();
+
             }
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            if (tamagochi.Thought == tamagochi.Thoughts[4])
+            if (tamagochi.ThoughtID == 4)
             {
                 tamagochi.AddLife(tamagochi.LifeAdditionStep);
                 DrawTamagochiThougts();
                 DrawTamagochiLifeBar();
+                PlayPikachuThought();
+
             }
         }
 
