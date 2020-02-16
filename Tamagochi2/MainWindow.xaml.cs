@@ -28,7 +28,7 @@ namespace Tamagochi2
         public MainWindow()
         {
             InitializeComponent();
-            player.MediaFailed += (s, r) => MessageBox.Show("Error");
+            //player.MediaFailed += (s, r) => MessageBox.Show("Error");
             player.Open(new Uri(@"sound/Pikachu_start.mp3", UriKind.RelativeOrAbsolute));
             player.Play();
         }
@@ -39,7 +39,6 @@ namespace Tamagochi2
 
             DrawGame();
             DrawTamagochi();
-
             DrawLifeBarDecreasing();
             DrawThoughtsChange();
             playerMain.Open(new Uri(@"sound/main.mp3", UriKind.RelativeOrAbsolute));
